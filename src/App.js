@@ -1,26 +1,55 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+import Header from "./Header";
+import Main from "./Main";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        textAlign: 'center',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        height: '100vh',
+        backgroundColor: 'crimson',
+        overflow: 'hidden',
+        minWidth: 300,
+        maxWidth: 400,
+        marginLeft: 'auto',
+        marginRight: 'auto',
+    },
+    toto: {
+        height: '100%',
+    },
+    MainContainer: {
+        textAlign: 'center',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'start',
+        minWidth: 300,
+        maxWidth: 400,
+        alignContent: 'start',
+        border: 'black',
+        borderStyle: 'solid',
+        overflow: 'auto',
+
+    },
+}));
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    const classes = useStyles();
 
+    return (
+        <div className={classes.root} >
+            <div className={classes.toto}>
+                <Header/>
+
+
+                <Main/>
+
+
+            </div>
+        </div>
+    );
+}
 export default App;
