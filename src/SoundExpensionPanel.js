@@ -10,7 +10,6 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 const useStyles = makeStyles(theme => ({
     root: {
         width: '100%',
-        backgroundColor: 'IndianRed',
     },
 
     Panel: {
@@ -18,15 +17,14 @@ const useStyles = makeStyles(theme => ({
     },
 
     PanelSummary: {
-        color: 'white',
+        color: 'grey',
         fontWeight: 'bold',
-        backgroundColor: 'IndianRed',
     },
 
     PanelDetails: {
         display: 'flex',
         flexWrap: 'wrap',
-        justifyContent: 'center',
+        justifyContent: 'left',
         alignContent: 'start',
         width: '100%',
         height: '100%',

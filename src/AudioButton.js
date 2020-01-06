@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import {soundContext} from "./Constant";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -29,7 +30,7 @@ const useStyles = makeStyles(theme => ({
     },
 
     label2: {
-        color: 'black',
+        color: 'grey',
         width: 60,
         fontSize: 10,
         margin: '5 5 4 5',
@@ -41,8 +42,8 @@ const useStyles = makeStyles(theme => ({
     },
 
     avatar: {
-        color: 'crimson',
-        borderColor: 'crimson',
+        color: 'IndianRed',
+        borderColor: 'IndianRed',
         borderStyle: 'solid',
         width: 60,
         height: 60,
@@ -50,8 +51,8 @@ const useStyles = makeStyles(theme => ({
         cursor: 'pointer',
     },
     avatar2: {
-        color: 'black',
-        borderColor: 'black',
+        color: 'grey',
+        borderColor: 'grey',
         borderStyle: 'solid',
         width: 60,
         height: 60,
@@ -96,7 +97,7 @@ function AudioButton(props) {
                 {props.label.charAt(0)}
             </Avatar>
             <audio className="audio-element" ref={ref} onEnded={() => onEnded()}>
-                <source src={'./static/media/' + props.soundFile}/>
+                <source src={soundContext + props.soundFile}/>
             </audio>
         </div>
     )

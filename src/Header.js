@@ -3,15 +3,16 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 
 const useStyles = makeStyles(theme => ({
     root: {
-        height: 30,
-        color: 'white',
+        height: 50,
+        color: 'IndianRed',
         fontWeight: 'bolder',
         textAlign: 'start',
         fontSize: 'x-large',
         width: '100%',
-        marginTop: 10,
-        marginLeft: 5,
-        marginBottom: 10,
+        position: 'fixed',
+        top: 0,
+        zIndex: 1,
+        paddingLeft: 15,
     }
 }));
 
@@ -20,7 +21,9 @@ function Header() {
 
     return (
         <div className={classes.root}>
-            Sound Machine
+            <div>
+                Sound Machine
+            </div>
         </div>
     );
 }
