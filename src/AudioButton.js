@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import {soundContext} from "./Constant";
+import {soundContext} from "../public/config";
 
 const useStyles = makeStyles(theme => ({
     root: {

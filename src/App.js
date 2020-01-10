@@ -4,6 +4,7 @@ import Header from "./Header";
 import Main from "./Main";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 
+
 const useStyles = makeStyles(theme => ({
     root: {
         textAlign: 'center',
@@ -19,8 +20,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function App() {
-    const classes = useStyles();
 
+    const classes = useStyles();
     return (
 
         <div className={classes.root}>

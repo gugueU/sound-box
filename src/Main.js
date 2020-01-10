@@ -1,7 +1,7 @@
 //@Flow
 
 import React, {useState} from 'react';
-import { mario, zelda, games, starWars, dragonBall, divers } from "./Constant"
+import { mario, zelda, games, starWars, dragonBall, divers } from '../public/config'
 import SoundExpensionPanel from "./SoundExpensionPanel"
 import makeStyles from "@material-ui/core/styles/makeStyles";
 

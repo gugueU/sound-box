@@ -1,4 +1,4 @@
-export const soundContext = 'http://gugue.fr/media/hdd/soundBox/sounds/'
+export const soundContext = 'http://gugue.fr/media/hdd/soundBox/sounds/';
 
 export const zelda = [
     {label: "Zelda chest", soundFile: 'zelda_chest.m4r'},
@@ -36,7 +36,7 @@ export const games = [
 
 export const dragonBall = [
     {label: "Kamehameha", soundFile: 'goku_kamehamea.wav'},
-     {label: "DB scooter", soundFile: 'dbz_scooter.m4r'},
+    {label: "DB scooter", soundFile: 'dbz_scooter.m4r'},
 ];
 
 export const starWars = [
