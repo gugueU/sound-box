@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import AudioButton from "./AudioButton";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
     PanelDetails: {
         display: 'flex',
         flexWrap: 'wrap',
-        justifyContent: 'left',
+        justifyContent: 'space-evenly',
         alignContent: 'start',
         width: '100%',
         height: '100%',
@@ -33,12 +33,10 @@ const useStyles = makeStyles(theme => ({
 
 function SoundExpenseionPanel({ title, sounds, setOnExpanded, panelOpened }: Props) {
     const classes = useStyles();
-    let [sound, setSound] = useState(undefined);
-
 
     const onClick = () => {
             setOnExpanded(title);
-    }
+    };
 
     const isOpened = panelOpened === title;
 
@@ -63,13 +61,15 @@ function SoundExpenseionPanel({ title, sounds, setOnExpanded, panelOpened }: Pro
             >
                 <div className={classes.PanelDetails} >
                     {sounds.map(({label, soundFile, image}) =>
-                        (isOpened && <AudioButton
+                        (isOpened &&
+                            <AudioButton
+                            id={label}
                             label={label}
                             soundFile={soundFile}
                             image={image}
                             key={label}
-                            setSound={setSound}
-                        />))}
+                        />
+                        ))}
                 </div>
             </ExpansionPanelDetails>}
         </ExpansionPanel>

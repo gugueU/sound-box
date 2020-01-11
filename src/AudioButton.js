@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {soundContext} from "../public/config";
-
 const useStyles = makeStyles(theme => ({
     root: {
         margin: 5,
@@ -79,7 +78,6 @@ function AudioButton(props) {
         ref.current.currentTime = 0;
     };
 
-    const isRender = localStorage.getItem("soundPlaying") === props.label;
     const handler = () => {
         setIsPlaying(!isPlaying);
         isPlaying ? stopAudio() : playAudio();
