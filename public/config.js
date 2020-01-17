@@ -1,1 +1,1 @@
-export const soundContext = 'http://gugue.fr/media/hdd/soundBox/sounds/';
+export const soundContext = 'http://gugue.fr/media/soundBox/sounds/';

@@ -61,7 +61,7 @@ function SoundExpenseionPanel({ title, sounds, setOnExpanded, panelOpened }: Pro
             >
                 <div className={classes.PanelDetails} >
                     {sounds.map(({label, soundFile, image}) =>
-                        (isOpened &&
+                        (
                             <AudioButton
                             id={label}
                             label={label}

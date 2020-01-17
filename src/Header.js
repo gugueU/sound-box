@@ -1,22 +1,26 @@
 import React from 'react';
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import SearchBar from "./SearchBar";
 
 const useStyles = makeStyles(theme => ({
     root: {
-        height: 50,
-        color: 'IndianRed',
+        height: 80,
+        color: 'white',
+        background: 'IndianRed',
         fontWeight: 'bolder',
         textAlign: 'start',
         fontSize: 'x-large',
         width: '100%',
-        position: 'fixed',
-        top: 0,
-        zIndex: 1,
-        paddingLeft: 15,
+        flexShrink: 0,
+        display: 'flex',
+        flexDirection: 'row',
+        marginTop: 20,
+        marginBottom: 20,
     }
 }));
 
-function Header() {
+function Header(props) {
+    const { search, setSearch } = props;
     const classes = useStyles();
 
     return (
@@ -24,6 +28,7 @@ function Header() {
             <div>
                 Sound Machine
             </div>
+            <SearchBar search={ search } setSearch={ setSearch }/>
         </div>
     );
 }

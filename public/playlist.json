@@ -39,6 +39,7 @@
         {"label" : "Castlevania", "soundFile" : "castlevania.m4r"},
         {"label" : "Gouls & Ghost", "soundFile" : "gouls_and_gobblins.m4r"},
         {"label" : "MGS", "soundFile" : "metal_gear_solid-alert.m4r"},
+        {"label" : "EA Sport", "soundFile" : "EA_Sports_Its_in_the_Game.mp3"},
         {"label" : "PSX", "soundFile" : "psx_startup.m4r"}
       ]
     },
@@ -67,6 +68,7 @@
         {"label" : "lightsaber", "soundFile" : "star_wars_lightsaber.m4r"},
         {"label" : "Cantina", "soundFile" : "star_wars_cantina_band.m4r"},
         {"label" : "Viper", "soundFile" : "star_wars_sonde_viper.m4r"},
+        {"label" : "Tie Fighter", "soundFile" : "tie_tighter_roar.mp3"},
         {"label" : "Utini", "soundFile" : "star_wars_utini.m4r"}
       ]
     },
@@ -84,7 +86,12 @@
         {"label" : "Les Charlots contre Dracula", "soundFile" : "les_charlots_contre_dracula.m4r"},
         {"label" : "Musclor", "soundFile" : "les_maitres_de_l_univers.m4r"},
         {"label" : "Bloodsports Jackson", "soundFile" : "bloodsport_jackson.m4r"},
-        {"label" : "Jolie Poupée", "soundFile" : "jolie_poupee.m4r"}
+        {"label" : "Kickboxer Ton Frère", "soundFile" : "Kickboxer_ton_frere_tu_te_souviens.mp3"},
+        {"label" : "Jolie Poupée", "soundFile" : "jolie_poupee.m4r"},
+        {"label" : "Christophe Lambert", "soundFile" : "christophe_lambert_rire.mp3"},
+        {"label" : "Philippe", "soundFile" : "hitman_le_cobra_philippe.mp3"},
+        {"label" : "Jeanne", "soundFile" : "jeanne_au_secours.mp3"},
+        {"label" : "Motus boule noire", "soundFile" : "motus_boule_noire.mp3"}
       ]
     }
   ]

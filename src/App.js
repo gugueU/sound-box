@@ -1,32 +1,32 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import Header from "./Header";
-import Main from "./Main";
+import MainAll from "./MainAll";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 
 
 const useStyles = makeStyles(theme => ({
     root: {
         textAlign: 'center',
-        height: '100vh',
         minWidth: 300,
         maxWidth: 400,
         marginLeft: 'auto',
         marginRight: 'auto',
-
+        height: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
     },
-
 
 }));
 
 function App() {
+    const [search, setSearch] = useState('');
 
     const classes = useStyles();
     return (
-
         <div className={classes.root}>
-                <Header/>
-                <Main />
+                <Header search={search} setSearch={setSearch}/>
+                <MainAll search={search} />
         </div>
     );
 }

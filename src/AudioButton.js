@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {soundContext} from "../public/config";
+import ReactAudioPlayer from 'react-audio-player';
 const useStyles = makeStyles(theme => ({
     root: {
         margin: 5,
@@ -12,15 +13,15 @@ const useStyles = makeStyles(theme => ({
         fontWeight: 'bold',
         fontSize: 'x-small',
         color: 'white',
-        maxWidth: 80,
+        maxWidth: 100,
         whiteSpace: 'nowrap',
         overflow: 'hidden',
     },
     label: {
         color: 'crimson',
-        width: 60,
-        fontSize: 10,
-        margin: '5 5 4 5',
+        width: 80,
+        fontSize: 12,
+        margin: '10 5 10 5',
         textAlign: 'center',
         fontWeight: 'bold',
         overflow: 'hidden',
@@ -30,9 +31,9 @@ const useStyles = makeStyles(theme => ({
 
     label2: {
         color: 'grey',
-        width: 60,
-        fontSize: 10,
-        margin: '5 5 4 5',
+        width: 80,
+        fontSize: 12,
+        margin: '10 5 10 5',
         textAlign: 'center',
         fontWeight: 'bold',
         overflow: 'hidden',
@@ -44,8 +45,8 @@ const useStyles = makeStyles(theme => ({
         color: 'IndianRed',
         borderColor: 'IndianRed',
         borderStyle: 'solid',
-        width: 60,
-        height: 60,
+        width: 80,
+        height: 80,
         backgroundColor: 'white',
         cursor: 'pointer',
     },
@@ -53,30 +54,34 @@ const useStyles = makeStyles(theme => ({
         color: 'grey',
         borderColor: 'grey',
         borderStyle: 'solid',
-        width: 60,
-        height: 60,
+        width: 80,
+        height: 80,
         backgroundColor: 'white',
         cursor: 'pointer',
     }
 }));
 
-
 function AudioButton(props) {
 
-    let ref = React.createRef();
+    let [audio, setAudio] = useState(undefined);
     let [isPlaying, setIsPlaying] = useState(false);
 
-    const classes = useStyles();
-
     const playAudio = () => {
-        localStorage.setItem("soundPlaying", props.label);
-        ref.current.play();
+            props.setSoundPlaying(props.label);
+            audio.audioEl.play();
     };
+
     const stopAudio = () => {
-        localStorage.setItem("soundPlaying", undefined);
-        ref.current.pause();
-        ref.current.currentTime = 0;
+        audio.audioEl.pause();
+        audio.audioEl.currentTime = 0;
     };
+
+    useEffect(() => {
+        if (isPlaying && props.soundPlaying !== props.label) {
+            stopAudio();
+            setIsPlaying(false);
+        }
+    });
 
     const handler = () => {
         setIsPlaying(!isPlaying);
@@ -85,7 +90,9 @@ function AudioButton(props) {
 
     const onEnded = () => {
         setIsPlaying(false);
+        props.setSoundPlaying(undefined);
     };
+    const classes = useStyles();
 
     return (
         <div className={classes.root}>
@@ -94,12 +101,16 @@ function AudioButton(props) {
                     className={isPlaying ? classes.avatar2 : classes.avatar}>
                 {props.label.charAt(0)}
             </Avatar>
-            <audio className="audio-element" ref={ref} onEnded={() => onEnded()}>
-                <source src={soundContext + props.soundFile}/>
-            </audio>
+
+            <ReactAudioPlayer
+                className="audio-element"
+                ref={(element) => setAudio(element)}
+                src={soundContext + props.soundFile}
+                volume={props.volume === undefined ? 1.0 : props.volume}
+                onEnded={() => onEnded()}
+            />
         </div>
     )
 }
-
 
 export default AudioButton;
