@@ -8,8 +8,9 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 const useStyles = makeStyles(theme => ({
     root: {
         textAlign: 'center',
-        minWidth: 300,
-        maxWidth: 400,
+        // minWidth: 300,
+        // maxWidth: 400,
+        width: '100%',
         marginLeft: 'auto',
         marginRight: 'auto',
         height: '100vh',

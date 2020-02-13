@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
         overflowY: 'auto',
         display: 'flex',
         flexWrap: 'wrap',
-        justifyContent: 'space-evenly',
+        justifyContent: 'center',
         alignContent: 'start',
         width: '100%',
         height: '100%',

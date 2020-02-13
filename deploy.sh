@@ -1,2 +1,2 @@
 npm run build
-scp -r build/* pi@192.168.5.5:/var/www/html/sound-box/
+scp -P 8022 -r build/* pi@gugue.fr:/var/www/html/sound-box/ 

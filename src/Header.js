@@ -4,7 +4,7 @@ import SearchBar from "./SearchBar";
 
 const useStyles = makeStyles(theme => ({
     root: {
-        height: 80,
+        height: 100,
         color: 'white',
         background: 'IndianRed',
         fontWeight: 'bolder',
@@ -14,8 +14,6 @@ const useStyles = makeStyles(theme => ({
         flexShrink: 0,
         display: 'flex',
         flexDirection: 'row',
-        marginTop: 20,
-        marginBottom: 20,
     }
 }));
 
