@@ -1,7 +1,6 @@
 //@Flow
 
-import React, {useState} from 'react';
-import {playlist2} from '../public/playlist2'
+import React, {useEffect, useState} from 'react';
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import AudioButton from "./AudioButton";
 import removeAccents from "remove-accents";
@@ -16,18 +15,41 @@ const useStyles = makeStyles(theme => ({
         alignContent: 'start',
         width: '100%',
         height: '100%',
-
+        paddingTop: '10px',
+        paddingBottom: '30px',
     },
+
 }));
 
 const MainAll = (props) => {
+
+    const [data, setData] = useState({ playlist: [] });
+    const [init, setInit] = useState(true);
+
+    const  myInit = {
+        method: 'GET',
+        headers: new Headers({
+            "accept": "application/json",
+        })
+    };
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const result =fetch('playlist.json')
+                .then((res) => res.json())
+                .then((data) => {
+                    setData(data);
+                })
+        };
+        fetchData()
+    }, [init]);
+
     const { search } = props;
-    const [soundPlaying, setSoundPlaying] = useState(undefined);
     const classes = useStyles();
 
     const cleanWord = ( word: String) => removeAccents(word).toLowerCase();
 
-    const isDisplay = (label: string, tags: []) => {
+    const isVisible = (label: string, tags: []) => {
         if (!search || search.length < 2 || search === '' || search === ' '){
             return true;
         }
@@ -40,19 +62,21 @@ const MainAll = (props) => {
 
     return (
         <div className={classes.root}>
-            {playlist2.map(item => {
+            {data.playlist.map(item => {
                 const { label, image, soundFile, tags, volume } = item;
-                const enabled = isDisplay(label, tags);
+                const visible = isVisible(label, tags);
                 return (
-                    enabled && <AudioButton
+                    <AudioButton
                     id={label}
                     label={label}
                     soundFile={soundFile}
                     image={image}
                     key={label}
-                    soundPlaying={soundPlaying}
-                    setSoundPlaying={setSoundPlaying}
+                    soundPlaying={props.soundPlaying}
+                    setSoundPlaying={props.setSoundPlaying}
                     volume={volume}
+                    repeat={props.repeat}
+                    visible={visible}
                 />)
             })}
         </div>
