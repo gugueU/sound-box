@@ -18,7 +18,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function App() {
-    const [search, setSearch] = useState('');
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const urlSearch = urlParams.get('search');
+
+    const [search, setSearch] = useState(urlSearch);
     const [soundPlaying, setSoundPlaying] = useState(undefined);
     const [repeat, setRepeat] = useState(false);
     const classes = useStyles();
