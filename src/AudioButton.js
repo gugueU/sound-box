@@ -76,14 +76,9 @@ function AudioButton(props) {
     };
 
     const onEnded = () => {
-        console.log(props.repeat);
+        setIsPlaying(false);
+        props.setSoundPlaying(undefined);
 
-        if (props.repeat) {
-            playAudio();
-        } else {
-            setIsPlaying(false);
-            props.setSoundPlaying(undefined);
-        }
     };
 
     const classes = useStyles();
@@ -108,6 +103,7 @@ function AudioButton(props) {
                 src={props.soundFile}
                 volume={props.volume === undefined ? 1.0 : props.volume}
                 onEnded={() => onEnded()}
+                loop={props.repeat}
             />
         </>
 

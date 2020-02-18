@@ -1,0 +1,8 @@
+#!/bin/bash
+
+echo "url : $1";
+echo "nom de sortie : $2";
+
+youtube-dl -f bestaudio --extract-audio --audio-format mp3 $1 -o $2;
+scp -P 8022 $2 pi@gugue.fr:/var/www/html/sound-box/soundBox/sounds/;
+rm -rf $2;
