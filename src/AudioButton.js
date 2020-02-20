@@ -2,6 +2,13 @@ import React, {useState, useEffect} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import ReactAudioPlayer from 'react-audio-player';
+import {
+    CircularProgressbar,
+    CircularProgressbarWithChildren,
+    buildStyles
+} from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
+
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -29,12 +36,19 @@ const useStyles = makeStyles(theme => ({
     },
     avatarPlaying: {
         color: 'IndianRed',
-        borderColor: 'grey',
-        border: 'solid 4px',
-        width: 80,
-        height: 80,
+        width: '90%',
+        height: '90%',
         backgroundColor: 'white',
         cursor: 'pointer',
+    },
+    progressBar: {
+        width: 80,
+        height: 80,
+    },
+
+    miniProgressBar: {
+        width: 20,
+        height: 20,
     },
     info: {
         color: 'black',
@@ -43,18 +57,23 @@ const useStyles = makeStyles(theme => ({
 
 function AudioButton(props) {
 
-    let [audio, setAudio] = useState(undefined);
-    let [isPlaying, setIsPlaying] = useState(false);
+    const [audio, setAudio] = useState(undefined);
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [percentage, setPercentage] = useState(0);
 
     const playAudio = () => {
+        setPercentage(0);
         audio.audioEl.play();
         props.setSoundPlaying(props.label);
-
-    };
+        setInterval(function(){
+            setPercentage(Math.trunc(audio.audioEl.currentTime/audio.audioEl.duration *100));
+        },100);
+    }
 
     const stopAudio = () => {
         audio.audioEl.pause();
         audio.audioEl.currentTime = 0;
+        setPercentage(0);
     };
 
     useEffect(() => {
@@ -76,24 +95,62 @@ function AudioButton(props) {
     };
 
     const onEnded = () => {
+        setPercentage(100);
         setIsPlaying(false);
         props.setSoundPlaying(undefined);
-
     };
 
     const classes = useStyles();
     return (
         <>
             {props.visible && <div className={classes.root}>
+                {!isPlaying && <Avatar
+                    src={props.image}
+                    alt={props.label}
+                    onClick={() => handler()}
+                    className={classes.avatar}
+                    variant='square'
+                >
+                    {props.label.charAt(0)}
+                </Avatar>}
+                {isPlaying &&
+                <>
+                <CircularProgressbarWithChildren
+                    value={percentage}
+                    className={classes.progressBar}
+                    strokeWidth={15}
+                    styles={buildStyles({
+                        pathTransition:
+                            percentage === 0 ? "none" : "stroke-dashoffset 0.0s ease 0s",
+                        pathColor: 'IndianRed',
+                        trailColor: 'grey',
+                        backgroundColor: 'grey',
+                        strokeLinecap: "butt"
+                    })}
+                >
+
                 <Avatar
                     src={props.image}
                     alt={props.label}
                     onClick={() => handler()}
-                    className={isPlaying ? classes.avatarPlaying : classes.avatar}
-                    variant='square'
-                >
-                    {props.label.charAt(0)}
-                </Avatar>
+                    className={classes.avatarPlaying}
+                    variant='circle'
+                    />
+                </CircularProgressbarWithChildren>
+                {/*<CircularProgressbar*/}
+                {/*    value={percentage}*/}
+                {/*    className={classes.miniProgressBar}*/}
+                {/*    strokeWidth={50}*/}
+                {/*    styles={buildStyles({pathTransition:*/}
+                {/*            percentage === 0 ? "none" : "stroke-dashoffset 0.0s ease 0s",*/}
+                {/*        pathColor: 'IndianRed',*/}
+                {/*        trailColor: 'grey',*/}
+                {/*        backgroundColor: 'grey',*/}
+                {/*        strokeLinecap: "butt"*/}
+                {/*    })}*/}
+                {/*/>*/}
+                </>
+                }
             </div>}
             <ReactAudioPlayer
                 className="audio-element"
@@ -104,7 +161,6 @@ function AudioButton(props) {
                 loop={props.repeat}
             />
         </>
-
     )
 }
 
