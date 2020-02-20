@@ -21,28 +21,7 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
-const MainAll = (props) => {
-
-    const [data, setData] = useState({ playlist: [] });
-    const [init, setInit] = useState(true);
-
-    const  myInit = {
-        method: 'GET',
-        headers: new Headers({
-            "accept": "application/json",
-        })
-    };
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const result =fetch('playlist.json')
-                .then((res) => res.json())
-                .then((data) => {
-                    setData(data);
-                })
-        };
-        fetchData()
-    }, [init]);
+function ListAll  (props) {
 
     const { search } = props;
     const classes = useStyles();
@@ -62,8 +41,8 @@ const MainAll = (props) => {
 
     return (
         <div className={classes.root}>
-            {data.playlist.map(item => {
-                const { label, image, soundFile, tags, volume } = item;
+            {props.data.playlist.map(item => {
+                const { label, image, soundFile, tags, volume, id } = item;
                 const visible = isVisible(label, tags);
                 return (
                     <AudioButton
@@ -82,4 +61,4 @@ const MainAll = (props) => {
         </div>
     );
 };
-export default MainAll;
+export default ListAll;

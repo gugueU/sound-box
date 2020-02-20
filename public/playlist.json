@@ -133,7 +133,7 @@
 
     },
 
-    {
+    { "id": "1",
       "label": "lightsaber",
       "soundFile":  "http://gugue.fr/media/soundBox/sounds/star_wars_lightsaber.mp3",
       "tags": [ "star wars", "jedi", "sith", "côté obscure",

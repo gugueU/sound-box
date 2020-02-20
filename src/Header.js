@@ -23,7 +23,15 @@ const useStyles = makeStyles(theme => ({
         flexDirection: 'row',
         alignItems: 'center',
         marginLeft: '15px',
-        fontSize: 'xx-large'
+        fontSize: 'xx-large',
+        textDecoration: 'none',
+        color: 'white'
+    },
+
+    link: {
+        textDecoration: 'none',
+        color: 'white',
+        border :'none',
     },
     tool: {
         height: 30,
@@ -74,11 +82,16 @@ function Header(props) {
     const { search, setSearch } = props;
     const classes = useStyles();
 
+    const toto = () => {
+        this.props.history.push('/');
+    };
+
+
     return (
-        <div className={classes.root}>
+        <div >
         <div className={classes.first}>
             <div className={classes.title}>
-                <div>Sound Machine</div>
+                Sound Machine
             </div>
             <SearchBar search={ search } setSearch={ setSearch }/>
         </div>

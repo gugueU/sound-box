@@ -90,12 +90,10 @@ function AudioButton(props) {
                     alt={props.label}
                     onClick={() => handler()}
                     className={isPlaying ? classes.avatarPlaying : classes.avatar}
-                    variant='rounded'
+                    variant='square'
                 >
                     {props.label.charAt(0)}
                 </Avatar>
-
-
             </div>}
             <ReactAudioPlayer
                 className="audio-element"
