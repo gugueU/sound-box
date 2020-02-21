@@ -36,14 +36,14 @@ const useStyles = makeStyles(theme => ({
     },
     avatarPlaying: {
         color: 'IndianRed',
-        width: '90%',
-        height: '90%',
+        width: '80%',
+        height: '80%',
         backgroundColor: 'white',
         cursor: 'pointer',
     },
     progressBar: {
-        width: 80,
-        height: 80,
+        width: 85,
+        height: 85,
     },
 
     miniProgressBar: {
