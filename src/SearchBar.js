@@ -9,44 +9,53 @@ import {theme} from "./Theme";
 
 
 const useStyles = makeStyles(theme => ({
-
-    root: {
-        width: 250,
-        marginRight: '15px',
+    root:{
+        width: '100vW',
         display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
+        flexDirection: 'row' ,
+        justifyContent: "left",
+        paddingLeft: 15,
+        margin: '5px 0px'
     },
+    input: {
+        width: '90vW',
+        padding: 'Opx 10px',
+    }
 }));
 
 export default function SeachBar(props) {
-    const {search, setSearch} = props;
+    const {searchSate, setSearchState} = props;
     const classes = useStyles();
 
     const onchange = (value: string) => {
-        setSearch(value);
+        console.log('value', value);
+
+        setSearchState(value);
     };
 
     const onClear = () => {
-        setSearch('');
+        setSearchState('');
     };
 
     return (
         <ThemeProvider theme={theme}>
+        <div className={classes.root}>
         <TextField
-            className={classes.root}
+            className={classes.input}
             id="outlined"
             variant="outlined"
             onChange={(event : object) => onchange(event.target.value)}
-            value={search}
+            value={searchSate}
             InputProps={{
                 endAdornment: (
                     <InputAdornment position="end">
-                            {search ? <ClearIcon onClick={() => onClear()}/> : <SearchIcon /> }
+                            {searchSate ? <ClearIcon onClick={() => onClear()}/> : <SearchIcon /> }
                     </InputAdornment>
                     ),
             }}
         />
+
+</div>
         </ThemeProvider>
     );
 }
