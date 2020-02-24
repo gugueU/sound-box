@@ -103,8 +103,7 @@ function AudioButton(props) {
         props.setSoundPlaying(undefined);
     };
 
-    const classes = useStyles(props.width / 3);
-    console.log(props.width);
+    const classes = useStyles();
     return (
         <>
             <ReactAudioPlayer

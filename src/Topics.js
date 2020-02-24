@@ -24,14 +24,12 @@ const useStyles = makeStyles(theme => ({
 function Topics(Props) {
     const classes = useStyles();
 
-    const {setSearchState, activeChip, setActiveChip} = Props;
+    const {activeChip, setActiveChip} = Props;
 
     const onclick = (label: string) => {
         if (isActive(label)) {
-            setSearchState('');
-            setActiveChip('');
+            setActiveChip(undefined);
         } else {
-            setSearchState(label);
             setActiveChip(label);
         }
     };

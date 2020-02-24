@@ -39,10 +39,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function ListAll(props) {
-    const [searchSate, setSearchState] = useState('');
+    const [searchSate, setSearchState] = useState(undefined);
     const [repeat, setRepeat] = useState(false);
     const [soundPlaying, setSoundPlaying] = useState(undefined);
-    const [activeChip, setActiveChip] = useState('');
+    const [activeChip, setActiveChip] = useState(undefined);
 
 
     const classes = useStyles();
@@ -69,13 +69,18 @@ function ListAll(props) {
         return tags && tags.some((tag) => cleanWord(tag).includes(cleanSearch));
     };
 
-
+    const IsMatchTopic = (activeChip: string, tags: []) => {
+        if(!activeChip) {
+            return true;
+        }
+        return tags && tags.some((tag) => cleanWord(tag).includes(cleanWord(activeChip)));
+    };
 
     return (
         <div className={classes.root}>
             <div className={classes.header}>
-                <SearchBar classNane={classes.search} searchSate={searchSate} setSearchState={setSearchState} setActiveChip={setActiveChip}/>
-                <Topics setSearchState={setSearchState} activeChip={activeChip} setActiveChip={setActiveChip}/>
+                <SearchBar classNane={classes.search} searchSate={searchSate} setSearchState={setSearchState} s/>
+                <Topics activeChip={activeChip} setActiveChip={setActiveChip}/>
                 <Players repeat={repeat} setRepeat={setRepeat} soundPlaying={soundPlaying}/>
             </div>
 
@@ -83,6 +88,7 @@ function ListAll(props) {
                 {props.data.playlist.map(item => {
                     const {label, image, soundFile, tags, volume, id} = item;
                     const visible = isVisible(label, tags);
+                    const matchTopic = IsMatchTopic(activeChip, tags);
                     return (
                         <AudioButton
                             id={id}
@@ -94,7 +100,7 @@ function ListAll(props) {
                             setSoundPlaying={setSoundPlaying}
                             volume={volume}
                             repeat={repeat}
-                            visible={visible}
+                            visible={matchTopic && visible}
                         />)
                 })}
             </div>

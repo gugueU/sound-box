@@ -25,17 +25,15 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function SeachBar(props) {
-    const {searchSate, setSearchState, setActiveChip} = props;
+    const {searchSate, setSearchState} = props;
     const classes = useStyles();
 
     const onchange = (value: string) => {
         setSearchState(value);
-        setActiveChip('');
     };
 
     const onClear = () => {
         setSearchState('');
-        setActiveChip('');
     };
 
     return (
