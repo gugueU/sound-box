@@ -5,6 +5,7 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import LoopIcon from "@material-ui/icons/Loop";
 import VolumeDownRoundedIcon from "@material-ui/icons/VolumeDownRounded";
 
+
 const useStyles = makeStyles(theme => ({
     player: {
         display: 'flex',
@@ -12,25 +13,24 @@ const useStyles = makeStyles(theme => ({
         margin: '5px 0px'
     },
     repeatButtonOn: {
-        backgroundColor: 'white',
-        color: 'IndianRed',
+        color: theme.palette.primary.main,
         display: 'flex',
         alignItems: 'center',
         marginLeft: 15,
-        border: 'solid 2px',
+        fontWeight: 'bold'
     },
     repeatButtonOff: {
-        backgroundColor: 'white',
         color: 'grey',
         display: 'flex',
         alignItems: 'center',
         marginLeft: 15,
-        border: 'solid 2px',
+        fontWeight: 'bold'
     },
     iconHp: {
         display: 'flex',
         alignItems: 'center',
         marginLeft: 20,
+        fontWeight: 'bold'
     },
     soundPlaying: {
         display: 'flex',
@@ -38,10 +38,12 @@ const useStyles = makeStyles(theme => ({
         width: '50%'
     },
     soundPlayingText: {
+        color: theme.palette.primary.main,
         width: '500px',
         overflow: 'hidden',
         textOverflow: 'ellipsis',
         whiteSpace: 'nowrap',
+        fontWeight: 'bold'
     }
 }));
 

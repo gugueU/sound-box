@@ -1,0 +1,18 @@
+#!/bin/bash
+
+
+youtube-dl -o "$2.%(ext)s" -f bestaudio --extract-audio --audio-format mp3 --write-all-thumbnails $1;
+mv "$2.mp3" temp.mp3;
+ffmpeg -i temp.mp3 -acodec libmp3lame -b:a 128k -ss "$3" -to "$4" "$2.mp3";
+scp -P 8022 "$2.mp3" pi@gugue.fr:/var/www/html/sound-box/soundBox/sounds/;
+scp -P 8022 "$2.jpg" pi@gugue.fr:/var/www/html/sound-box/soundBox/images/;
+rm -rf "$2.mp3";
+rm -rf "$2.jpg";
+rm -rf temp*
+
+echo '    {
+      "label": "'$2'",
+      "soundFile":  "http://gugue.fr/media/soundBox/sounds/'$2'.mp3",
+      "image" : "http://gugue.fr/media/soundBox/images/'$2'.jpg",
+      "tags": [ "" ]
+    },' ;

@@ -42,6 +42,8 @@ function ListAll(props) {
     const [searchSate, setSearchState] = useState('');
     const [repeat, setRepeat] = useState(false);
     const [soundPlaying, setSoundPlaying] = useState(undefined);
+    const [activeChip, setActiveChip] = useState('');
+
 
     const classes = useStyles();
 
@@ -67,11 +69,13 @@ function ListAll(props) {
         return tags && tags.some((tag) => cleanWord(tag).includes(cleanSearch));
     };
 
+
+
     return (
         <div className={classes.root}>
             <div className={classes.header}>
-                <SearchBar classNane={classes.search} searchSate={searchSate} setSearchState={setSearchState}/>
-                <Topics/>
+                <SearchBar classNane={classes.search} searchSate={searchSate} setSearchState={setSearchState} setActiveChip={setActiveChip}/>
+                <Topics setSearchState={setSearchState} activeChip={activeChip} setActiveChip={setActiveChip}/>
                 <Players repeat={repeat} setRepeat={setRepeat} soundPlaying={soundPlaying}/>
             </div>
 
@@ -81,11 +85,11 @@ function ListAll(props) {
                     const visible = isVisible(label, tags);
                     return (
                         <AudioButton
-                            id={label}
+                            id={id}
                             label={label}
                             soundFile={soundFile}
                             image={image}
-                            key={label}
+                            key={id+label}
                             soundPlaying={soundPlaying}
                             setSoundPlaying={setSoundPlaying}
                             volume={volume}

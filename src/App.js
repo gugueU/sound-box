@@ -1,7 +1,10 @@
 import React from 'react';
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import { ThemeProvider } from '@material-ui/core/styles';
 import Main from "./Mains";
 import Footer from "./Footer";
+import theme from './theme';
+
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -17,10 +20,12 @@ function App() {
     const classes = useStyles();
 
     return (
-        <div className={classes.root}>
+        <ThemeProvider theme={theme}>
+            <div className={classes.root}>
             <Main/>
             <Footer/>
         </div>
+        </ThemeProvider>
     );
 }
 

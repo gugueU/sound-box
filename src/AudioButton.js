@@ -7,6 +7,7 @@ import {
     buildStyles
 } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import theme from "./theme";
 
 
 const useStyles = makeStyles(theme => ({
@@ -24,6 +25,7 @@ const useStyles = makeStyles(theme => ({
         overflow: 'hidden',
         position: 'relative',
         border : 'solid 1px black',
+        margin: 1
     },
 
     avatar: {
@@ -132,7 +134,7 @@ function AudioButton(props) {
                     styles={buildStyles({
                         pathTransition:
                             percentage === 0 ? "none" : "stroke-dashoffset 0.0s ease 0s",
-                        trailColor: 'orange',
+                        trailColor: theme.palette.primary.main,
                         pathColor: 'black',
                         strokeLinecap: "butt"
                     })}

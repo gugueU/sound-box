@@ -5,7 +5,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from '@material-ui/icons/Search';
 import ClearIcon from '@material-ui/icons/Clear';
 import {ThemeProvider} from "@material-ui/styles";
-import {theme} from "./Theme";
+import theme from "./theme";
 
 
 const useStyles = makeStyles(theme => ({
@@ -20,21 +20,22 @@ const useStyles = makeStyles(theme => ({
     input: {
         width: '90vW',
         padding: 'Opx 10px',
+        fontWeight: 'bold'
     }
 }));
 
 export default function SeachBar(props) {
-    const {searchSate, setSearchState} = props;
+    const {searchSate, setSearchState, setActiveChip} = props;
     const classes = useStyles();
 
     const onchange = (value: string) => {
-        console.log('value', value);
-
         setSearchState(value);
+        setActiveChip('');
     };
 
     const onClear = () => {
         setSearchState('');
+        setActiveChip('');
     };
 
     return (

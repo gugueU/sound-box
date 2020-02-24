@@ -1,8 +1,9 @@
 //@Flow
 
-import React from 'react';
-import makeStyles from "@material-ui/core/styles/makeStyles";
+import { makeStyles } from '@material-ui/core';
 import Chip from "@material-ui/core/Chip";
+import React from 'react';
+
 
 const useStyles = makeStyles(theme => ({
     topics: {
@@ -16,22 +17,43 @@ const useStyles = makeStyles(theme => ({
 
     chip: {
         marginRight: 2,
+        fontWeight: 'bold'
     },
 }));
 
-function Topics() {
+function Topics(Props) {
     const classes = useStyles();
+
+    const {setSearchState, activeChip, setActiveChip} = Props;
+
+    const onclick = (label: string) => {
+        if (isActive(label)) {
+            setSearchState('');
+            setActiveChip('');
+        } else {
+            setSearchState(label);
+            setActiveChip(label);
+        }
+    };
+
+    const isActive = (chipLabel: string) => {
+        return activeChip && activeChip === chipLabel;
+    };
+
+    const topicsList = ['Animé', "Film", 'Street Fighter', 'Générique', 'Star Wars', 'TV', 'Nintendo', "Série", 'Politique', 'Capcom', 'Jeu Vidéo'];
 
     return (
         <div className={classes.topics}>
-            <Chip label="Série" className={classes.chip}/>
-            <Chip label="Films"className={classes.chip}/>
-            <Chip label="Politique"className={classes.chip}/>
-            <Chip label="Emissions"className={classes.chip}/>
-            <Chip label="Pubs"className={classes.chip}/>
-            <Chip label="Jeux-vidéos"className={classes.chip}/>
+            {topicsList.map(topic => {
+                return (
+            <Chip
+                color={!isActive(topic) ? 'secondary' : 'primary'}
+                label={topic} className={classes.chip} onClick={() => onclick(topic)}
+            />
+            )
+            })}
         </div>
     );
-};
+}
 
 export default Topics;
