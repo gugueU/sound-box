@@ -23,7 +23,7 @@ function App() {
         <ThemeProvider theme={theme}>
             <div className={classes.root}>
             <Main/>
-            <Footer/>
+            {/*<Footer/>*/}
         </div>
         </ThemeProvider>
     );
