@@ -14,7 +14,6 @@ const useStyles = makeStyles(theme => ({
         paddingLeft: 15,
         margin: '5px 0px'
     },
-
     chip: {
         marginRight: 2,
         fontWeight: 'bold'
@@ -45,6 +44,7 @@ function Topics(Props) {
             {topicsList.map(topic => {
                 return (
             <Chip
+                key={topic}
                 color={!isActive(topic) ? 'secondary' : 'primary'}
                 label={topic} className={classes.chip} onClick={() => onclick(topic)}
             />
@@ -54,4 +54,4 @@ function Topics(Props) {
     );
 }
 
-export default Topics;
+export default React.memo(Topics);

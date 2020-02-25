@@ -67,7 +67,7 @@ function AudioButton(props) {
         props.setSoundPlaying(props.label);
         setInterval(function () {
             setPercentage(Math.trunc(audio.audioEl.currentTime / audio.audioEl.duration * 100));
-        }, 100);
+        }, 150);
     };
 
     const stopAudio = () => {
@@ -81,7 +81,7 @@ function AudioButton(props) {
             stopAudio();
             setIsPlaying(false);
         }
-    }, [props.soundPlaying]);
+    }, [isPlaying, props.label, props.soundPlaying, stopAudio]);
 
     const handler = () => {
         setIsPlaying(!isPlaying);
@@ -143,4 +143,4 @@ function AudioButton(props) {
     )
 }
 
-export default AudioButton;
+export default React.memo(AudioButton);

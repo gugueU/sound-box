@@ -53,7 +53,7 @@ function ListAll(props) {
         if (search && value) {
             setSearchState(value);
         }
-    }, [value]);
+    }, [search, value]);
 
 
     const cleanWord = (word: String) => removeAccents(word).toLowerCase();
@@ -81,7 +81,7 @@ function ListAll(props) {
             <div className={classes.header}>
                 <SearchBar classNane={classes.search} searchSate={searchSate} setSearchState={setSearchState} s/>
                 <Topics activeChip={activeChip} setActiveChip={setActiveChip}/>
-                <Players repeat={repeat} setRepeat={setRepeat} soundPlaying={soundPlaying}/>
+                <Players repeat={repeat} setRepeat={setRepeat} soundPlaying={soundPlaying} setSoundPlaying={setSoundPlaying}/>
             </div>
 
             <div className={classes.itemContainer}>

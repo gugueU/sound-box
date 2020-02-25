@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function SeachBar(props) {
+function SeachBar(props) {
     const {searchSate, setSearchState} = props;
     const classes = useStyles();
 
@@ -58,3 +58,5 @@ export default function SeachBar(props) {
         </ThemeProvider>
     );
 }
+
+export default React.memo(SeachBar);
