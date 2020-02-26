@@ -56,6 +56,9 @@ const useStyles = makeStyles(theme => ({
 
 function AudioButton(props) {
 
+    const {label, soundFile, soundPlaying, setSoundPlaying, image, volume, visible, repeat} = props;
+
+
     const [audio, setAudio] = useState(undefined);
     const [isPlaying, setIsPlaying] = useState(false);
     const [percentage, setPercentage] = useState(0);
@@ -77,16 +80,16 @@ function AudioButton(props) {
     };
 
     useEffect(() => {
-        if (isPlaying && props.soundPlaying !== props.label) {
+        if (isPlaying && soundPlaying !== label) {
             stopAudio();
             setIsPlaying(false);
         }
-    }, [isPlaying, props.label, props.soundPlaying, stopAudio]);
+    }, [isPlaying, label, soundPlaying, stopAudio]);
 
     const handler = () => {
         setIsPlaying(!isPlaying);
         if (isPlaying) {
-            props.setSoundPlaying(undefined);
+            setSoundPlaying(undefined);
             stopAudio();
         } else {
             playAudio();
@@ -100,31 +103,33 @@ function AudioButton(props) {
     const onEnded = () => {
         setPercentage(100);
         setIsPlaying(false);
-        props.setSoundPlaying(undefined);
+        setSoundPlaying(undefined);
     };
 
     const classes = useStyles();
+
+    console.log("audio", props.label);
     return (
         <>
             <ReactAudioPlayer
                 className="audio-element"
                 ref={(element) => setAudio(element)}
-                src={props.soundFile}
-                volume={props.volume === undefined ? 1.0 : props.volume}
+                src={soundFile}
+                volume={volume === undefined ? 1.0 : volume}
                 onEnded={() => onEnded()}
-                loop={props.repeat}
-                onCanPlayThrough={() => setCanPlay(true)}S
+                loop={repeat}
+                onCanPlayThrough={() => setCanPlay(true)}
             />
-            {props.visible &&
+            {visible &&
             <div className={classes.root}>
                 <Avatar
-                    src={props.image}
-                    alt={props.label}
+                    src={image}
+                    alt={label}
                     onClick={() => canPlay && handler()}
                     className={canPlay ? classes.avatar: classes.avatarDisable}
                     variant='square'
                 >
-                    {props.label}
+                    {label}
                 </Avatar>
                 {isPlaying && <CircularProgressbar
                     value={percentage}

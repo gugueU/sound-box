@@ -58,7 +58,7 @@ function ListAll(props) {
 
     const cleanWord = (word: String) => removeAccents(word).toLowerCase();
 
-    const isVisible = (label: string, tags: []) => {
+    const isMatchSearch = (label: string, tags: []) => {
         if (!searchSate || searchSate.length < 2 || searchSate === '' || searchSate === ' ') {
             return true;
         }
@@ -87,8 +87,9 @@ function ListAll(props) {
             <div className={classes.itemContainer}>
                 {props.data.playlist.map(item => {
                     const {label, image, soundFile, tags, volume, id} = item;
-                    const visible = isVisible(label, tags);
-                    const matchTopic = IsMatchTopic(activeChip, tags);
+                    const visible = IsMatchTopic(activeChip, tags) && isMatchSearch(label, tags);
+                    const isPlaying = soundPlaying === label;
+                    const loop = isPlaying && repeat;
                     return (
                         <AudioButton
                             id={id}
@@ -99,8 +100,8 @@ function ListAll(props) {
                             soundPlaying={soundPlaying}
                             setSoundPlaying={setSoundPlaying}
                             volume={volume}
-                            repeat={repeat}
-                            visible={matchTopic && visible}
+                            repeat={loop}
+                            visible={visible}
                         />)
                 })}
             </div>
