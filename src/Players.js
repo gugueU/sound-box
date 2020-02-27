@@ -5,6 +5,8 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import LoopIcon from "@material-ui/icons/Loop";
 import VolumeDownRoundedIcon from "@material-ui/icons/VolumeDownRounded";
 import StopIcon from '@material-ui/icons/Stop';
+import {buildStyles, CircularProgressbar} from "react-circular-progressbar";
+import theme from "./theme";
 
 const useStyles = makeStyles(theme => ({
     player: {
@@ -56,18 +58,47 @@ const useStyles = makeStyles(theme => ({
         textOverflow: 'ellipsis',
         whiteSpace: 'nowrap',
         fontWeight: 'bold',
+    },
+    progressBarWrapper: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100%',
+        marginLeft: 15,
+    },
+    progressBar:{
+        width: 22,
+        height: 22,
     }
 }));
 
 function Players(Props) {
     const classes = useStyles();
 
-    const { repeat, setRepeat, soundPlaying, setSoundPlaying} = Props;
+    const { repeat, setRepeat, soundPlaying, stopAudio, percentage} = Props;
+
+    const onStop = () => {
+        stopAudio();
+    }
 
     return (
         <div className={classes.player}>
             <LoopIcon className={repeat ? classes.repeatButtonOn : classes.repeatButtonOff} onClick={() => setRepeat(!repeat)} />
-            {soundPlaying && <StopIcon className={classes.iconStop} onClick={()=> setSoundPlaying(undefined)}/>}
+            {soundPlaying && <div className={classes.progressBarWrapper}>
+                <CircularProgressbar
+                value={percentage}
+                className={classes.progressBar}
+                strokeWidth={40}
+                styles={buildStyles({
+                    pathTransition:
+                        percentage === 0 ? "none" : "stroke-dashoffset 0.0s ease 0s",
+                    trailColor: theme.palette.primary.main,
+                    pathColor: 'black',
+                    strokeLinecap: "butt"
+                })}
+            />
+            </div>}
+            {soundPlaying && <StopIcon className={classes.iconStop} onClick={()=> onStop()}/>}
             {soundPlaying && <VolumeDownRoundedIcon className={classes.iconHp}/>}
             {soundPlaying && <div className={classes.soundPlaying}>
                 <div className={classes.soundPlayingText}>{soundPlaying}</div>

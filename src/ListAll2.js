@@ -44,24 +44,23 @@ function ListAll2(props) {
     const [repeat, setRepeat] = useState(false);
     const [soundPlaying, setSoundPlaying] = useState(undefined);
     const [activeChip, setActiveChip] = useState(undefined);
-    const [src, setSrc] = useState(undefined);
 
      const [audio, setAudio] = useState(undefined);
      const [percentage, setPercentage] = useState(0);
 
-    const playAudio = (src: string) => {
-        console.log('play');
-        console.log('audio.audioEl', audio.audioEl);
-        audio.audioEl.src = src;
+    const playAudio = (label: string, src: string) => {
+        setSoundPlaying(label);
         setPercentage(0);
+        audio.audioEl.src = src;
         audio.audioEl.play();
-        setSoundPlaying(props.label);
+
         setInterval(function () {
             setPercentage(Math.trunc(audio.audioEl.currentTime / audio.audioEl.duration * 100));
         }, 150);
     };
 
     const stopAudio = () => {
+        setSoundPlaying(undefined);
         audio.audioEl.src = undefined;
         audio.audioEl.pause();
         audio.audioEl.currentTime = 0;
@@ -69,7 +68,7 @@ function ListAll2(props) {
     };
 
     const onEnded = () => {
-        setPercentage(100);
+        // setPercentage(0);
         setSoundPlaying(undefined);
     };
 
@@ -105,14 +104,13 @@ function ListAll2(props) {
         return tags && tags.some((tag) => cleanWord(tag).includes(cleanWord(activeChip)));
     };
 
-    console.log('src', src);
 
     return (
         <div className={classes.root}>
             <div className={classes.header}>
                 <SearchBar classNane={classes.search} searchSate={searchSate} setSearchState={setSearchState} s/>
                 <Topics activeChip={activeChip} setActiveChip={setActiveChip}/>
-                <Players repeat={repeat} setRepeat={setRepeat} soundPlaying={soundPlaying} setSoundPlaying={setSoundPlaying}/>
+                <Players repeat={repeat} setRepeat={setRepeat} soundPlaying={soundPlaying} stopAudio={stopAudio} percentage={percentage}/>
             </div>
 
             <div className={classes.itemContainer}>
@@ -120,6 +118,8 @@ function ListAll2(props) {
                     const {label, image, soundFile, tags, volume, id} = item;
                      const visible = isVisible(label, tags);
                      const matchTopic = IsMatchTopic(activeChip, tags);
+                    const isPlaying = soundPlaying && label && soundPlaying === label;
+
                     return (
                         <AudioButton2
                             id={id}
@@ -135,14 +135,13 @@ function ListAll2(props) {
                             percentage={percentage}
                             playAudio={playAudio}
                             stopAudio={stopAudio}
-                            setSrc={setSrc}
+                            isPlaying={isPlaying}
                         />)
                 })}
             </div>
             <ReactAudioPlayer
                 className="audio-element"
                 ref={(element) => setAudio(element)}
-                src={src}
                 onEnded={() => onEnded()}
                 loop={repeat}
             />

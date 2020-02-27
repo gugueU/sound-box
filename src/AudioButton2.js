@@ -54,17 +54,17 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function AudioButton2(props) {
-    const [isPlaying, setIsPlaying] = useState(false);
 
     const handler = () => {
-        setIsPlaying(!isPlaying);
-        if (isPlaying) {
-            props.setSoundPlaying(undefined);
+
+        if (props.isPlaying) {
             props.stopAudio();
         } else {
-            props.playAudio(props.soundFile);
+            props.playAudio(props.label, props.soundFile);
         }
     };
+
+
 
     const classes = useStyles();
     return (
@@ -80,18 +80,18 @@ function AudioButton2(props) {
                 >
                     {props.label}
                 </Avatar>
-                {isPlaying && <CircularProgressbar
-                    value={props.percentage}
-                    className={classes.miniProgressBar}
-                    strokeWidth={40}
-                    styles={buildStyles({
-                        pathTransition:
-                            props.percentage === 0 ? "none" : "stroke-dashoffset 0.0s ease 0s",
-                        trailColor: theme.palette.primary.main,
-                        pathColor: 'black',
-                        strokeLinecap: "butt"
-                    })}
-                />}
+                {/*{props.isPlaying && <CircularProgressbar*/}
+                {/*    value={props.percentage}*/}
+                {/*    className={classes.miniProgressBar}*/}
+                {/*    strokeWidth={40}*/}
+                {/*    styles={buildStyles({*/}
+                {/*        pathTransition:*/}
+                {/*            props.percentage === 0 ? "none" : "stroke-dashoffset 0.0s ease 0s",*/}
+                {/*        trailColor: theme.palette.primary.main,*/}
+                {/*        pathColor: 'black',*/}
+                {/*        strokeLinecap: "butt"*/}
+                {/*    })}*/}
+                {/*/>}*/}
             </div>}
         </>
     )

@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 
 import ListAll2 from "./ListAll2";
+import ListAll from "./ListAll";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 
 import {
@@ -37,6 +38,7 @@ function Main() {
             <HashRouter>
                 <Switch>
                     <Route path="/:search?/:value?" children={<ListAll2 data={data}/>}/>
+                    <Route path="v1/:search?/:value?" children={<ListAll data={data}/>}/>
                 </Switch>
             </HashRouter>
 
