@@ -144,6 +144,7 @@ function ListAll2(props) {
                 ref={(element) => setAudio(element)}
                 onEnded={() => onEnded()}
                 loop={repeat}
+                preload='none'
             />
         </div>
     );
